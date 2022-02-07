@@ -1,0 +1,21 @@
+FROM lscr.io/linuxserver/webtop:ubuntu-xfce
+
+### Install firefox and chrome browser
+#RUN $INST_SCRIPTS/firefox.sh
+#RUN $INST_SCRIPTS/chrome.sh
+
+# Create user1
+#RUN ["apt-get", "-y", "install", "sudo"]
+#RUN \
+  # configure the "user1" user
+#  groupadd user1 && \
+#  useradd user1 -s /bin/bash -m -g user1 -G sudo && \
+#  echo 'user1:user1' |chpasswd && \
+#  mkdir /home/user1/app 
+
+## USER1
+#USER user1
+#WORKDIR "/home/user1/app"
+
+# Keep container alive
+CMD tail -f /dev/null
