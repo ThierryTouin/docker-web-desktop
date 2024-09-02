@@ -6,6 +6,7 @@ FROM lscr.io/linuxserver/webtop:latest
 #RUN $INST_SCRIPTS/firefox.sh
 #RUN $INST_SCRIPTS/chrome.sh
 
+
 # Create user1
 #RUN ["apt-get", "-y", "install", "sudo"]
 #RUN \
