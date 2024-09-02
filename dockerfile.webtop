@@ -1,4 +1,6 @@
-FROM lscr.io/linuxserver/webtop:ubuntu-xfce
+#FROM lscr.io/linuxserver/webtop:ubuntu-xfce
+FROM lscr.io/linuxserver/webtop:latest
+
 
 ### Install firefox and chrome browser
 #RUN $INST_SCRIPTS/firefox.sh
