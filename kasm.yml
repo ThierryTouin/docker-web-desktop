@@ -1,0 +1,19 @@
+services:
+  kasm:
+    # Kasm Workspaces - Bureau Ubuntu avec KasmVNC
+    # Multi-arch: amd64 + arm64
+    # https://www.kasmweb.com/docs/latest/
+    image: kasmweb/ubuntu-jammy-desktop:1.16.0
+    container_name: kasm-desktop
+    shm_size: 2gb
+    ports:
+      - "6901:6901"
+    environment:
+      - VNC_PW=kasm2025
+      - LANG=fr_FR.UTF-8
+    volumes:
+      - kasm-profile:/home/kasm-user
+    restart: unless-stopped
+
+volumes:
+  kasm-profile:

@@ -1,10 +1,76 @@
-# Connect & Control
-If the container is started like mentioned above, connect via one of these options:
+# Docker Web Desktop
 
-* connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
-* connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
-* connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
+Bureau Linux accessible via navigateur web, compatible Docker et Podman.
 
+## Utilisation rapide
 
-# Reference
-https://github.com/ConSol/docker-headless-vnc-container
+```bash
+./run-kasm.sh start
+```
+
+## Interface du script
+
+```
+./run-kasm.sh <commande> [options]
+
+Commandes:
+  start     Démarrer le bureau
+  stop      Arrêter le bureau
+  clean     Arrêter et supprimer volumes/données
+  status    Afficher l'état des conteneurs
+  logs      Afficher les logs en temps réel
+  (aucune)  Afficher l'aide et infos de connexion
+
+Options:
+  --podman  Forcer l'utilisation de Podman
+  --docker  Forcer l'utilisation de Docker
+```
+
+Le moteur (Docker ou Podman) est auto-détecté. Priorité : Docker > Podman.
+Forçage possible via `--podman` ou variable `USE_PODMAN=1`.
+
+## Connexion
+
+- **URL**: https://localhost:6901
+- **Utilisateur**: `kasm_user`
+- **Mot de passe**: `kasm2025`
+
+## Compatibilité ARM64 (Motorola Edge Pro / Android)
+
+L'image est multi-arch (amd64 + arm64). Pour utiliser sur un smartphone via Termux + Podman :
+
+```bash
+# Dans Termux
+pkg install podman
+./run-kasm.sh start --podman
+```
+
+## Version de l'image
+
+| Image | Version |
+|-------|---------|
+| kasmweb/ubuntu-jammy-desktop | 1.16.0 |
+
+## Structure du projet
+
+```
+├── kasm.yml            # Compose Kasm
+├── run-kasm.sh         # Script de gestion
+└── readme.md
+```
+
+## Structure du projet
+
+```
+├── webtop.yml          # Compose Webtop
+├── kasm.yml            # Compose Kasm
+├── neko.yml            # Compose n.eko
+├── run-webtop.sh       # Script de gestion Webtop
+├── run-kasm.sh         # Script de gestion Kasm
+├── run-neko.sh         # Script de gestion n.eko
+├── config/
+│   ├── webtop/         # Données persistantes Webtop
+│   ├── kasm/           # Données persistantes Kasm
+│   └── neko/           # Données persistantes n.eko
+└── readme.md
+```
