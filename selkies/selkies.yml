@@ -1,0 +1,39 @@
+services:
+  selkies:
+    # Selkies-GStreamer - Bureau Wayland avec WebRTC
+    # Accès directement depuis un navigateur sans plugin
+    # https://github.com/selkies-project/selkies-gstreamer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: selkies-wayland-desktop:latest
+    container_name: selkies-desktop
+    shm_size: 4gb
+    ports:
+      - "8080:8080"
+    environment:
+      # --- Selkies-GStreamer ---
+      - SELKIES_ENCODER=x264enc
+      - SELKIES_ENABLE_RESIZE=true
+      - SELKIES_ENABLE_BASIC_AUTH=true
+      - SELKIES_BASIC_AUTH_USER=desktop
+      - SELKIES_BASIC_AUTH_PASSWORD=desktop2025
+      - SELKIES_VIDEO_BITRATE=8000
+      - SELKIES_FRAMERATE=30
+      # --- Locale ---
+      - LANG=fr_FR.UTF-8
+      - TZ=Europe/Paris
+    volumes:
+      - selkies-home:/home/desktop
+    devices:
+      # Accélération GPU (optionnel - commenter si pas de GPU)
+      - /dev/dri:/dev/dri
+    # Capabilities pour Wayland/DRI
+    cap_add:
+      - SYS_NICE
+    security_opt:
+      - seccomp=unconfined
+    restart: unless-stopped
+
+volumes:
+  selkies-home:
